@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, g
-
+from flask_cors import CORS
 from resources.kids import kids 
 import models 
 
@@ -7,6 +7,8 @@ DEBUG = True
 PORT = 8000
 
 app = Flask(__name__) 
+
+CORS(kids, origins=['http://localhost:3000'], supports_credentials=True)
 
 app.register_blueprint(kids, url_prefix='/api/v1/kids')
 

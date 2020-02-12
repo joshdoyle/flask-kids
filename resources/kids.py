@@ -8,7 +8,14 @@ kids = Blueprint('kids', 'kids')
 
 @kids.route('/', methods=['GET'])
 def kids_index():
-  return "kids resource working"
+	kids = models.Kid.select()
+
+	kids_list = [model_to_dict(k) for k in kids]
+
+	return jsonify (data=kids_list,
+		message=f"Successfully retrieved {len(kids_list)} kids",
+    	status=200)
+
 
 @kids.route('/', methods=['POST'])
 def create_kid():
